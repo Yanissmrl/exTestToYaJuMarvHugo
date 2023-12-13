@@ -1,7 +1,26 @@
-const database = require('./src/database');
-const User = require('./model/user');
-const app = require('./src/app');
 const http = require('http');
+const express = require('express');
+const models = require('./models');
+
+const app = express();
+
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+});
+
+
+models.sequelize.authenticate().then(() => {
+    console.log('Connection has been established successfully.');
+}).catch(error => {
+    console.error('Unable to connect to the database:', error);
+});
+models.sequelize.sync().then(() => {
+    console.log('Database sync');
+}).catch((error) => {
+    console.log(error, 'Database sync failed');
+});
+
+
 
 let httpsServer = null;
 
