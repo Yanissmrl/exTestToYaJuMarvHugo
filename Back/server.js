@@ -1,8 +1,8 @@
+require('dotenv').config();
 const http = require('http');
 const express = require('express');
-const models = require('./models');
-require('dotenv').config();
-
+const models = require('./model');
+console.log(process.env);
 const app = express();
 
 app.get('/', (req, res) => {
